@@ -13,4 +13,8 @@ export const config = {
       { duration: "2m", target: 0 },
     ],
   },
+  cloud: {
+    projectID: 3657634,
+    name: 'Test Framework K6'
+  }
 };
