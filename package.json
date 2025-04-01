@@ -1,0 +1,19 @@
+{
+  "name": "aut-performance-k6",
+  "version": "1.0.0",
+  "description": "Performance Automation with K6",
+  "scripts": {
+    "k6:load": "k6 run tests/load-test.js",
+    "k6:report": "k6 run --out json=reports/results.json tests/scenarios/load-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/testever/aut-performance-k6.git"
+  },
+  "author": "William Montenegro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/testever/aut-performance-k6/issues"
+  },
+  "homepage": "https://gitlab.com/testever/aut-performance-k6#readme"
+}
