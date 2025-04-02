@@ -4,7 +4,8 @@ import { config } from "../k6-config.js";
 import { sleep } from "k6";
 
 export const options = {
-  stages: config.stages.load,
+  stages: config.stages.smoke,
+  cloud: config.cloud,
 };
 
 export default function () {

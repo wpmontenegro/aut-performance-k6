@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Performance Automation with K6",
   "scripts": {
-    "k6:run": "k6 run tests/example.js",
-    "k6:local": "k6 run --out cloud tests/example.js",
-    "k6:cloud": "k6 cloud tests/example.js",
-    "k6:report": "k6 run --out json=reports/results.json tests/scenarios/load-test.js"
+    "k6:run": "k6 run tests/smoke-test.js",
+    "k6:local": "k6 run --out cloud tests/smoke-test.js",
+    "k6:cloud": "k6 cloud tests/smoke-test.js",
+    "k6:report": "k6 run --out json=reports/results.json tests/smoke-test.js"
   },
   "repository": {
     "type": "git",

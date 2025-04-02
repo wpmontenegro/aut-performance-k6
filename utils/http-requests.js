@@ -1,5 +1,5 @@
 import http from "k6/http";
-import { config } from "../k6-config";
+import { config } from "../k6-config.js";
 
 export function getRequest(endpoint, params = {}) {
   return http.get(`${params.baseURL || config.baseURL}${endpoint}`);
