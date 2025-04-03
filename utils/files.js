@@ -5,10 +5,10 @@ export function readJsonFromData(relativePath = "users") {
   return JSON.parse(open(absolutePath));
 }
 
-export function readRandomJsonFromData(relativePath = "users") {
-  const data = new SharedArray(relativePath, function () {
-    const array = readJsonFromData(relativePath);
-    return array;
-  });
-  return data[Math.floor(Math.random() * data.length)];
+const userData = new SharedArray("users", function () {
+  return readJsonFromData("users");
+});
+
+export function readRandomUserFromData() {
+  return userData[Math.floor(Math.random() * userData.length)];
 }

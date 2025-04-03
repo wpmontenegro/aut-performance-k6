@@ -1,6 +1,6 @@
 import { postRequest } from "../utils/http-requests.js";
 import { validateResponse } from "../utils/checks.js";
-import {readRandomJsonFromData} from "../utils/files.js"
+import { readRandomJsonFromData } from "../utils/files.js";
 import { config } from "../k6-config.js";
 import { sleep } from "k6";
 
