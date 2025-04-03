@@ -38,7 +38,7 @@ export const config = {
     ]
   },
   cloud: {
-    projectID: process.env.PROJECT_ID,
-    name: process.env.TEST_NAME,
+    projectID: __ENV.PROJECT_ID,
+    name: __ENV.TEST_NAME,
   }
 };

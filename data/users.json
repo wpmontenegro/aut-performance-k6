@@ -1,4 +1,14 @@
-{
-    "email": "user_123@mailsac.com",
-    "password": "Testing2025"
-}
+[
+  {
+    "username": "user1",
+    "password": "password1"
+  },
+  {
+    "username": "user2",
+    "password": "password2"
+  },
+  {
+    "username": "user3",
+    "password": "password3"
+  }
+]
