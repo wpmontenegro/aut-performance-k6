@@ -10,7 +10,7 @@ export function postRequest(endpoint, body, params = {}) {
     `${params.baseURL || config.baseURL}${endpoint}`,
     JSON.stringify(body),
     {
-      headers: { "Content-Type": "application/json" },
+      headers: params.headers || { "Content-Type": "application/json"},
     }
   );
 }
