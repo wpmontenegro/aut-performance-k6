@@ -1,6 +1,6 @@
 import { postRequest } from "../utils/http-requests.js";
 import { validateResponse } from "../utils/checks.js";
-import { readRandomJsonFromData } from "../utils/files.js";
+import { readRandomUserFromData } from "../utils/data-loader.js";
 import { config } from "../k6-config.js";
 import { sleep } from "k6";
 
@@ -9,7 +9,7 @@ export const options = {
 };
 
 const url = "http://test.k6.io";
-const body = readRandomJsonFromData("users");
+const body = readRandomUserFromData("users");
 
 export default function () {
   let response = postRequest("/login", body, { baseUrl: url });
