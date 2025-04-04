@@ -10,7 +10,9 @@ export const options = {
 };
 
 export default function () {
-  const res = getRequest("/");
-  validateResponse(res);
-  sleep(1);
+  group("GetPage", function () {
+    const res = getRequest("/");
+    validateResponse(res);
+    sleep(1);
+  });
 }

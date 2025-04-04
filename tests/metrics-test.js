@@ -24,14 +24,16 @@ export const options = {
 };
 
 export default function () {
-  const name = "Bert";
-  const res = getRequest(`/api/json?name=${name}`);
-  const contentOK = res.json("name") === name;
+  group("GetUser", function () {
+    const name = "Bert";
+    const res = getRequest(`/api/json?name=${name}`);
+    const contentOK = res.json("name") === name;
 
-  TrendRequestTimeDuration.add(res.timings.duration);
-  RateContentOK.add(contentOK);
-  GaugeContentSize.add(res.body.length);
-  CounterErrors.add(!contentOK);
+    TrendRequestTimeDuration.add(res.timings.duration);
+    RateContentOK.add(contentOK);
+    GaugeContentSize.add(res.body.length);
+    CounterErrors.add(!contentOK);
 
-  sleep(1);
+    sleep(1);
+  });
 }
