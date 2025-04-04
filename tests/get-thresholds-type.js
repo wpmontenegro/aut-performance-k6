@@ -1,17 +1,19 @@
 import { getRequest } from "../utils/http-requests.js";
 import { validateResponse } from "../utils/checks.js";
 import { config } from "../k6-config.js";
-import { sleep } from "k6";
+import { group, sleep } from "k6";
 
 export const options = {
   stages: config.stages.smoke,
-  thresholds: config.thresholds,
+  thresholds: {
+    "http_req_duration{type:API}": ["p(95)<200"],
+  },
   cloud: config.cloud,
 };
 
 export default function () {
   group("GetPage", function () {
-    const res = getRequest("/");
+    const res = getRequest("/", { tags: { type: "API" } });
     validateResponse(res);
     sleep(1);
   });

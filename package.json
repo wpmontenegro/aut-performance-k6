@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Performance Automation with K6",
   "scripts": {
-    "k6:run": "k6 run tests/smoke-test.js",
-    "k6:local": "k6 run --out cloud tests/smoke-test.js",
-    "k6:cloud": "k6 cloud tests/smoke-test.js",
-    "k6:report": "k6 run --out json=reports/results.json tests/smoke-test.js"
+    "k6:run": "k6 run tests/get-thresholds-type.js",
+    "k6:local": "k6 run --out cloud tests/get-thresholds-typet.js",
+    "k6:cloud": "k6 cloud tests/get-thresholds-typet.js",
+    "k6:report": "k6 run --out json=reports/results.json tests/get-thresholds-typet.js"
   },
   "repository": {
     "type": "git",

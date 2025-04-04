@@ -1,7 +1,7 @@
 import { getRequest } from "../utils/http-requests.js";
 import { config } from "../k6-config.js";
 import { Trend, Rate, Counter, Gauge } from "k6/metrics";
-import { sleep } from "k6";
+import { group, sleep } from "k6";
 
 export const TrendRequestTimeDuration = new Trend("RTT");
 export const RateContentOK = new Rate("ContentOK");

@@ -2,7 +2,7 @@ import { postRequest } from "../utils/http-requests.js";
 import { validateResponse } from "../utils/checks.js";
 import { readRandomUserFromData } from "../utils/data-loader.js";
 import { config } from "../k6-config.js";
-import { sleep } from "k6";
+import { group, sleep } from "k6";
 
 export const options = {
   stages: config.stages.load,
