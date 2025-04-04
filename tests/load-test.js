@@ -5,10 +5,11 @@ import { sleep } from "k6";
 
 export const options = {
   stages: config.stages.load,
+  thresholds: config.thresholds,
 };
 
 export default function () {
-  let response = getRequest("/");
-  validateResponse(response);
+  const res = getRequest("/");
+  validateResponse(res);
   sleep(1);
 }

@@ -6,13 +6,14 @@ import { sleep } from "k6";
 
 export const options = {
   stages: config.stages.smoke,
+  thresholds: config.thresholds,
 };
 
 const url = "http://test.k6.io";
 
 export default function () {
   const body = readRandomUserFromData("users");
-  let response = postRequest("/login", body, { baseUrl: url });
-  validateResponse(response);
+  const res = postRequest("/login", body, { baseUrl: url });
+  validateResponse(res);
   sleep(1);
 }

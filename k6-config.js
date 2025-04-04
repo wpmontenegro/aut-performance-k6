@@ -24,6 +24,10 @@ export const config = {
     ],
     smoke: [{ duration: "5s", target: 5 }],
   },
+  thresholds: {
+    http_req_failed: ["rate<0.01"],
+    http_req_duration: ["p(95)<200"],
+  },
   cloud: {
     projectID: __ENV.PROJECT_ID || "default_project",
     name: __ENV.TEST_NAME || "default_test",
