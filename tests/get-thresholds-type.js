@@ -7,6 +7,7 @@ export const options = {
   stages: config.stages.smoke,
   thresholds: {
     "http_req_duration{type:API}": ["p(95)<200"],
+    checks: ["rate>0.9"],
   },
   cloud: config.cloud,
 };
