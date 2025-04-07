@@ -3,10 +3,10 @@ import { config } from "../k6-config.js";
 import { Trend, Rate, Counter, Gauge } from "k6/metrics";
 import { group, sleep } from "k6";
 
-export const TrendRequestTimeDuration = new Trend("RTT");
-export const RateContentOK = new Rate("ContentOK");
-export const GaugeContentSize = new Gauge("ContentSize");
-export const CounterErrors = new Counter("Errors");
+const TrendRequestTimeDuration = new Trend("RTT");
+const RateContentOK = new Rate("ContentOK");
+const GaugeContentSize = new Gauge("ContentSize");
+const CounterErrors = new Counter("Errors");
 
 export const options = {
   stages: config.stages.smoke,
