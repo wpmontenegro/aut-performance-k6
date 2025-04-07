@@ -10,10 +10,11 @@ export const options = {
 };
 
 const url = "http://test.k6.io";
+// Each user belongs to a VU instance
+const body = readRandomUserFromData("users");
 
 export default function () {
   group("Login", function () {
-    const body = readRandomUserFromData("users");
     const res = postRequest("/login", body, { baseUrl: url });
     validateResponse(res);
     sleep(1);
