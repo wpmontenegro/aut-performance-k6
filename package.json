@@ -4,10 +4,10 @@
   "description": "Performance Automation with K6",
   "scripts": {
     "bundle": "webpack",
-    "k6:run": "k6 run tests/get-thresholds-type.js",
-    "k6:local": "k6 run --out cloud tests/get-thresholds-typet.js",
-    "k6:cloud": "k6 cloud tests/get-thresholds-typet.js",
-    "k6:report": "k6 run --out json=reports/results.json tests/get-thresholds-typet.js"
+    "k6:run": "k6 run -e ENVIRONMENT=qa tests/get-page.js",
+    "k6:local": "k6 run --out cloud tests/get-page.js",
+    "k6:cloud": "k6 cloud tests/get-page.js",
+    "k6:report": "k6 run --out json=reports/results.json tests/get-page.js"
   },
   "repository": {
     "type": "git",
