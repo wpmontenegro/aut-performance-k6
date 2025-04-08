@@ -1,8 +1,7 @@
 import { SharedArray } from "k6/data";
 
 export function readJsonFromData(relativePath = "users") {
-  const absolutePath = import.meta.resolve(`../data/${relativePath}.json`);
-  return JSON.parse(open(absolutePath));
+  return JSON.parse(open(`../data/${relativePath}.json`));
 }
 
 const userData = new SharedArray("users", function () {

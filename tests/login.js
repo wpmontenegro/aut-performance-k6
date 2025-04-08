@@ -5,7 +5,7 @@ import { config } from "../k6-config.js";
 import { group, sleep } from "k6";
 
 export const options = {
-  stages: config.stages.load,
+  stages: config.stages.smoke,
   thresholds: config.thresholds,
 };
 
