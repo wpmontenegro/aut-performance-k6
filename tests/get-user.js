@@ -3,6 +3,7 @@ import { BASE_URL } from "../config/settings.js";
 import { getRequest } from "../utils/http-requests.js";
 import { Trend, Rate, Counter, Gauge } from "k6/metrics";
 import { group, sleep } from "k6";
+import { getRandomName } from "../utils/faker.js";
 
 const TrendRequestTimeDuration = new Trend("RTT");
 const RateContentOK = new Rate("ContentOK");
@@ -19,10 +20,11 @@ export const options = {
   },
 };
 
-// GET USER USING CUSTOM THRESHOLDS
+const name = getRandomName();
+
+// GET USER USING CUSTOM THRESHOLDS AND FAKER JS
 export default function () {
   group("GetUser", function () {
-    const name = "Bert";
     const res = getRequest(`${BASE_URL}/api/json?name=${name}`);
     const contentOK = res.json("name") === name;
 

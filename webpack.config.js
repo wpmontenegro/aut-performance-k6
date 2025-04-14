@@ -14,4 +14,7 @@ module.exports = {
   },
   target: "web",
   externals: [/k6(\/.*)?/],
+  performance: {
+    hints: false,
+  },
 };
