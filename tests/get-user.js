@@ -1,7 +1,9 @@
+import { STAGES } from "../config/workloads.js";
+import { BASE_URL } from "../config/settings.js";
 import { getRequest } from "../utils/http-requests.js";
-import { config } from "../k6-config.js";
 import { Trend, Rate, Counter, Gauge } from "k6/metrics";
 import { group, sleep } from "k6";
+import { getRandomName } from "../utils/faker.js";
 
 const TrendRequestTimeDuration = new Trend("RTT");
 const RateContentOK = new Rate("ContentOK");
@@ -9,24 +11,21 @@ const GaugeContentSize = new Gauge("ContentSize");
 const CounterErrors = new Counter("Errors");
 
 export const options = {
-  stages: config.stages.smoke,
+  stages: STAGES.smoke,
   thresholds: {
-    // Count: Incorrect content cannot be returned more than 99 times.
     Errors: ["count<100"],
-    // Gauge: returned content must be smaller than 4000 bytes
     ContentSize: ["value<4000"],
-    // Rate: content must be OK more than 95%
     ContentOK: ["rate>0.95"],
-    // Trend: Percentiles, averages, medians, and minimums
-    // must be within specified milliseconds.
     RTT: ["p(99)<300", "p(90)<250", "avg<200", "med<150", "min<130"],
   },
 };
 
+const name = getRandomName();
+
+// GET USER USING CUSTOM THRESHOLDS AND FAKER JS
 export default function () {
   group("GetUser", function () {
-    const name = "Bert";
-    const res = getRequest(`/api/json?name=${name}`);
+    const res = getRequest(`${BASE_URL}/api/json?name=${name}`);
     const contentOK = res.json("name") === name;
 
     TrendRequestTimeDuration.add(res.timings.duration);

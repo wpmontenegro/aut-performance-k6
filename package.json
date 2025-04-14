@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Performance Automation with K6",
   "scripts": {
-    "k6:run": "k6 run tests/get-thresholds-type.js",
-    "k6:local": "k6 run --out cloud tests/get-thresholds-typet.js",
-    "k6:cloud": "k6 cloud tests/get-thresholds-typet.js",
-    "k6:report": "k6 run --out json=reports/results.json tests/get-thresholds-typet.js"
+    "k6:bundle": "webpack",
+    "k6:dist": "k6 run -e ENVIRONMENT=qa dist/get-user.bundle.js",
+    "k6:test": "k6 run -e ENVIRONMENT=qa tests/get-page.js",
+    "k6:cloud": "k6 cloud tests/get-page.js",
+    "k6:report": "k6 run --out json=reports/results.json tests/get-page.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,17 @@
   "bugs": {
     "url": "https://gitlab.com/testever/aut-performance-k6/issues"
   },
-  "homepage": "https://gitlab.com/testever/aut-performance-k6#readme"
+  "homepage": "https://gitlab.com/testever/aut-performance-k6#readme",
+  "keywords": [],
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@faker-js/faker": "^9.7.0",
+    "@types/k6": "^1.0.2",
+    "babel-loader": "^10.0.0",
+    "core-js": "^3.41.0",
+    "webpack": "^5.99.3",
+    "webpack-cli": "^6.0.1",
+    "webpack-glob-entries": "^1.0.1"
+  }
 }

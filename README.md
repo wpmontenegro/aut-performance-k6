@@ -1,93 +1,85 @@
-# aut-performance-k6
+# Proyecto de Pruebas de Performance con K6 + Webpack
 
+Este proyecto contiene una serie de scripts de prueba usando [K6](https://k6.io/) para evaluar el rendimiento de APIs, ejemplificando buenas prácticas como:
 
+- Uso de `thresholds` personalizados.
+- Lectura de datos desde archivos `.json`.
+- Importación de librerías externas vía Webpack (como `faker-js`).
+- Separación modular del código (requests, checks, data loader, etc).
+- Gestión de entornos por medio de variables `.env`.
+- Ejecución filtrada de pruebas mediante `tags`.
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+## 📁 Estructura del proyecto
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/testever/aut-performance-k6.git
-git branch -M main
-git push -uf origin main
+AUT-PERFORMANCE-K6
+│── config/
+|   │── settings.js         # Configuración general por entorno
+|   │── thresholds.js       # Umbrales personalizados
+|   │── workloads.js        # Configuración de carga
+|── data/
+|   │── users.json          # Datos de entrada para pruebas
+|── tests/
+|   │── get-page.js
+|   │── get-user.js
+|   │── login.js
+|── utils/
+|   │── checks.js
+|   │── data-loader.js
+|   │── faker.js
+|   │── http-requests.js
+|── dist/                 # Bundles generados por Webpack
+|── reports/              # Reportes de resultados
+|── .env                  # Variables de entorno (credenciales, ambiente)
+|── webpack.config.js     # Configuración para uso de librerías NPM
 ```
 
-## Integrate with your tools
+## 🚀 Ejecución de pruebas
 
-- [ ] [Set up project integrations](https://gitlab.com/testever/aut-performance-k6/-/settings/integrations)
+### Sin uso de librerías externas
 
-## Collaborate with your team
+Puedes ejecutar cualquier script directamente con:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+```bash
+k6 run tests/get-user.js
+```
 
-## Test and Deploy
+### Con uso de librerías externas (Webpack)
 
-Use the built-in continuous integration in GitLab.
+Para poder usar librerías NPM (como `faker-js`), primero debes generar el bundle con Webpack:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```bash
+npm run k6:build
+```
 
-***
+Esto generará un archivo `.bundle.js` en la carpeta `dist`. Luego puedes ejecutarlo con:
 
-# Editing this README
+```bash
+k6 run dist/get-user.bundle.js
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+⚠️ **Importante**: Asegúrate de que los archivos no se importen múltiples veces desde diferentes rutas. Webpack puede generar errores o duplicación de dependencias si ocurre reimportación circular o duplicada.
 
-## Suggestions for a good README
+## 🌐 Configuración por entorno
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Este proyecto permite seleccionar entornos mediante variables de entorno. Puedes crear un archivo `.env` con credenciales sensibles:
 
-## Name
-Choose a self-explaining name for your project.
+```
+USERNAME=testuser
+PASSWORD=secret
+```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Para cambiar el entorno al ejecutar pruebas, agrega:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+```bash
+k6 run -e ENVIRONMENT=qa dist/get-user.bundle.js
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 📦 Librerías externas
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Este proyecto usa [`faker-js`](https://www.npmjs.com/package/@faker-js/faker) como ejemplo para importar librerías desde NPM y utilizarlas en los scripts. Recuerda que hay limitaciones con algunas dependencias que no están soportadas por el runtime de K6 (que no es Node.js).
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## ⚠️ Notas
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Si una librería no es compatible con K6 (por depender de Node APIs como `fs`, `crypto`, etc), el bundle fallará o no funcionará en tiempo de ejecución.
+- Por ahora, no se cuenta con integración CI.
