@@ -1,7 +1,11 @@
-# Proyecto de Pruebas de Performance con K6 + Webpack
+# K6 + Webpack Performance Automation Framework
 
-Este proyecto contiene una serie de scripts de prueba usando [K6](https://k6.io/) para evaluar el rendimiento de APIs, ejemplificando buenas prácticas como:
+Framework de automatización pruebas de Performance con K6.
+Este proyecto se integra con Webpack para el uso de librerías externas.
 
+## 🚀 Características
+
+- Automatización de pruebas de performance usando K6
 - Uso de `thresholds` personalizados.
 - Lectura de datos desde archivos `.json`.
 - Importación de librerías externas vía Webpack (como `faker-js`).
@@ -9,7 +13,16 @@ Este proyecto contiene una serie de scripts de prueba usando [K6](https://k6.io/
 - Gestión de entornos por medio de variables `.env`.
 - Ejecución filtrada de pruebas mediante `tags`.
 
-## 📁 Estructura del proyecto
+## 🛠️ Tecnologías Utilizadas
+
+- **Lenguaje de programación**: Javascript
+- **Frameworks de automatización**:
+  - [K6](https://k6.io/)
+- **Herramientas adicionales**:
+  - [NPM](https://www.npmjs.com/)
+  - [Webpack](https://webpack.js.org/)
+
+## 📂 Estructura del Proyecto
 
 ```
 AUT-PERFORMANCE-K6
@@ -34,7 +47,22 @@ AUT-PERFORMANCE-K6
 |── webpack.config.js     # Configuración para uso de librerías NPM
 ```
 
-## 🚀 Ejecución de pruebas
+## 📋 Instalación
+
+### Clonar el Repositorio
+
+```sh
+git clone https://github.com/wpmontenegro/aut-performance-k6.git
+cd aut-performance-k6
+```
+
+### Instalación de Dependencias
+
+```sh
+npm install
+```
+
+## ▶️ Ejecución de pruebas
 
 ### Sin uso de librerías externas
 
@@ -60,9 +88,11 @@ k6 run dist/get-user.bundle.js
 
 ⚠️ **Importante**: Asegúrate de que los archivos no se importen múltiples veces desde diferentes rutas. Webpack puede generar errores o duplicación de dependencias si ocurre reimportación circular o duplicada.
 
-## 🌐 Configuración por entorno
+## 🔧 Configuración
 
-Este proyecto permite seleccionar entornos mediante variables de entorno. Puedes crear un archivo `.env` con credenciales sensibles:
+Este proyecto permite seleccionar entornos mediante variables de entorno.
+Estas variables se pueden configurar dentro de la ruta `config/settings.js`
+Puedes crear un archivo `.env` con credenciales sensibles:
 
 ```
 USERNAME=testuser
@@ -82,4 +112,11 @@ Este proyecto usa [`faker-js`](https://www.npmjs.com/package/@faker-js/faker) co
 ## ⚠️ Notas
 
 - Si una librería no es compatible con K6 (por depender de Node APIs como `fs`, `crypto`, etc), el bundle fallará o no funcionará en tiempo de ejecución.
-- Por ahora, no se cuenta con integración CI.
+
+## 📬 Contacto
+
+Para preguntas o sugerencias, puedes contactarme a través de:
+
+- Correo electrónico: wmontenegro@outlook.com.pe
+- LinkedIn: [**wmontenegro**](https://www.linkedin.com/in/wmontenegro)
+- GitHub: [**wpmontenegro**](https://github.com/wpmontenegro)
